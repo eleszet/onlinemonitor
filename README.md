@@ -1,8 +1,9 @@
 # onlinemonitor - project for practice reason
 
-my first 
-- oop/python project 
+my first project with
+- oop/python 
 - postgres docker https://hub.docker.com/_/postgres
+- postgres access via psycopg2 https://pypi.org/project/psycopg2/ (pip install psycopg2)
 - git
 
 onlinemonitor for saved hosts
