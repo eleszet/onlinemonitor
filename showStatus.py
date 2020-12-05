@@ -19,7 +19,8 @@ def enterNewHost(hostTable):
 
 def showHostList(hostTable, pingProtocolTable, hostList):
     clear()
-    print("Results of the last pings (10 minutes past)")
+    sumTotalPings = retNumVal(countTotalForAll10(pingProtocolTable))
+    print(f"Results of the last pings (10 minutes past - total pings {sumTotalPings})")
     for entry in hostList:
         hostInfoList = hostInfo(pingProtocolTable, entry[0])
         # sum of pings for host

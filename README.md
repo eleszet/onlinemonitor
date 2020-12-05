@@ -7,3 +7,7 @@ my first
 
 onlinemonitor for saved hosts
 not tested on linux yet
+
+todo
+- add config file instead of hardcoded connection parameter
+- add verbose mode to let script run in service mode

@@ -128,7 +128,7 @@ def countTotalForAll10(table):
     timeMinusTenMinutes = datetime.datetime.now() - datetime.timedelta(minutes=10)
     # create table for protocol entries
     postgreSQL_Query = "select count(*) from " + table + " org where date_added > %s"
-    conSet[0].execute(postgreSQL_Query, (hostName,timeMinusTenMinutes,))
+    conSet[0].execute(postgreSQL_Query, (timeMinusTenMinutes,))
     lines = conSet[0].fetchall()
     closeConnection(conSet)
     return lines

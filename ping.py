@@ -8,7 +8,6 @@
 from tableHandling import checkTable
 from tableHandling import createHostTable
 from tableHandling import createProtocolTable
-from tableHandling import openConnection
 from tableHandling import retHosts
 from pingHandler import handlePing
 import time
@@ -40,6 +39,5 @@ while True:
         pingThread = Thread(target = handlePing.execPing(pingProtocolTable, entry[0]), args = (10, ))
         pingThread.start()
         pingThread.join()
-        #os.spawnlp(handlePing.execPing(pingProtocolTable, entry[0]))
     time.sleep(1)
         
