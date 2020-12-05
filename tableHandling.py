@@ -68,12 +68,12 @@ def addHost(table, hostName):
     closeConnection(conSet)
     return
 
-def addProtocol(table, hostName, issue, protocolLog):
+def addProtocol(table, hostName, ms, issue):
     conSet = openConnection()
     # create table for protocol entries
     postgreSQL_Query = "insert into " + table + " (hostName, reaction, issue, date_added) values(%s, %s, %s, %s)"
     try:
-        conSet[0].execute(postgreSQL_Query, (hostName,protocolLog,issue, datetime.datetime.now(),))
+        conSet[0].execute(postgreSQL_Query, (hostName, ms, issue, datetime.datetime.now(),))
         conSet[1].commit()
     except:
         print("Error while saving")
@@ -85,6 +85,50 @@ def retHosts(table):
     # create table for protocol entries
     postgreSQL_Query = "select hostName from " + table
     conSet[0].execute(postgreSQL_Query)
+    lines = conSet[0].fetchall()
+    closeConnection(conSet)
+    return lines
+
+def retHostInfo10(table, hostName):
+    conSet = openConnection()
+    #set date to select
+    timeMinusTenMinutes = datetime.datetime.now() - datetime.timedelta(minutes=10)
+    # create table for protocol entries
+    postgreSQL_Query = "select hostName, avg(reaction) from " + table + " org where hostname = %s and date_added > %s group by hostname"
+    conSet[0].execute(postgreSQL_Query, (hostName,timeMinusTenMinutes,))
+    lines = conSet[0].fetchall()
+    closeConnection(conSet)
+    return lines
+    
+def countTotalForHost10(table, hostName):
+    conSet = openConnection()
+    #set date to select
+    timeMinusTenMinutes = datetime.datetime.now() - datetime.timedelta(minutes=10)
+    # create table for protocol entries
+    postgreSQL_Query = "select count(*) from " + table + " org where hostname = %s and date_added > %s"
+    conSet[0].execute(postgreSQL_Query, (hostName,timeMinusTenMinutes,))
+    lines = conSet[0].fetchall()
+    closeConnection(conSet)
+    return lines
+
+def countIssueHost10(table, hostName, failSucess):
+    conSet = openConnection()
+    #set date to select
+    timeMinusTenMinutes = datetime.datetime.now() - datetime.timedelta(minutes=10)
+    # create table for protocol entries
+    postgreSQL_Query = "select count(*) from " + table + " org where hostname = %s and date_added > %s and issue=%s"
+    conSet[0].execute(postgreSQL_Query, (hostName,timeMinusTenMinutes, failSucess,))
+    lines = conSet[0].fetchall()
+    closeConnection(conSet)
+    return lines
+
+def countTotalForAll10(table):
+    conSet = openConnection()
+    #set date to select
+    timeMinusTenMinutes = datetime.datetime.now() - datetime.timedelta(minutes=10)
+    # create table for protocol entries
+    postgreSQL_Query = "select count(*) from " + table + " org where date_added > %s"
+    conSet[0].execute(postgreSQL_Query, (hostName,timeMinusTenMinutes,))
     lines = conSet[0].fetchall()
     closeConnection(conSet)
     return lines

@@ -1,8 +1,6 @@
 from tableHandling import addProtocol
 import subprocess, platform
 
-
-
 class handlePing(object):
     def __init__(self): 
         self.name = name
@@ -15,7 +13,10 @@ class handlePing(object):
         args = "ping " + " " + ping_str + " " + hostName
         #extractPingResult = subprocess.call(args, shell=need_sh)
         #msTime, issue 
-        result = extractPingResult(str(subprocess.check_output(args)))
+        try:
+            result = extractPingResult(str(subprocess.check_output(args)))
+        except:
+            result = 0,1        
         addProtocol(protocolTable, hostName, int(result[0]), str(result[1]))
         return 
     
@@ -30,7 +31,8 @@ def extractPingResult(cmdReturn):
         # check if any string contains the value $$ms
         if  re.search("ms", entry):
             testVar = entry
-            numOut = re.findall("\d+", testVar)
+            num = re.findall(r"\d+", testVar)
+            numOut = num[0]
             break
     if numOut ==0:
         issue="1"
