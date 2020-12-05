@@ -11,3 +11,4 @@ not tested on linux yet
 todo
 - add config file instead of hardcoded connection parameter
 - add verbose mode to let script run in service mode
+- move ping handler to separate loop (indepent from console output)

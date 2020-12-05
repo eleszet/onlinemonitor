@@ -39,5 +39,5 @@ while True:
         pingThread = Thread(target = handlePing.execPing(pingProtocolTable, entry[0]), args = (10, ))
         pingThread.start()
         pingThread.join()
-    time.sleep(1)
+    # time.sleep(1)
         
