@@ -1,29 +1,36 @@
 from tableHandling import addProtocol
 import subprocess, platform
 from threading import Thread
+import threading
+import time
 
-def startPing(hostList, pingProtocolTable):
-    for entry in hostList:
-        pingThread = Thread(target = handlePing.execPing(pingProtocolTable, entry[0]), args = (10, ))
-        pingThread.start()
-        pingThread.join()
 class handlePing(object):
-    def __init__(self): 
-        self.name = name
+    # constructor of the ping handle
+    def __init__(self, *args):
+        self.args = args
+        self.protocolTable = args[0]
+        self.hostName = args[1]
+        self.interval = 0.5
+        thread = threading.Thread(target=self.execPing, args=())
+        #thread.daemon = True  # Daemonize thread
+        thread.start()        # Start the execution
+
     # class for the ping
-    def execPing(protocolTable, hostName):
+    def execPing(self):
         # Returns True if host responds to a ping request
         import subprocess, platform
         # Ping parameters as function of OS
         ping_str = "-n 1" if  platform.system().lower()=="windows" else "-c 1"
-        args = "ping " + " " + ping_str + " " + hostName
+        args = "ping " + " " + ping_str + " " + self.hostName
         #extractPingResult = subprocess.call(args, shell=need_sh)
         #msTime, issue 
-        try:
-            result = extractPingResult(str(subprocess.check_output(args)))
-        except:
-            result = 0,1        
-        addProtocol(protocolTable, hostName, int(result[0]), str(result[1]))
+        while True:
+            try:
+                result = extractPingResult(str(subprocess.check_output(args)))
+            except:
+                result = 0,1        
+            addProtocol(self.protocolTable, self.hostName, int(result[0]), str(result[1]))
+            time.sleep(self.interval)
         return 
     
 # internal functions

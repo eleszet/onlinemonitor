@@ -1,4 +1,4 @@
-# onlinemonitor - project for practice reason
+# onlinemonitor - ptactive some python
 
 my first 
 - oop/python project 
@@ -15,4 +15,5 @@ note
 
 todo
 - add config file instead of hardcoded connection parameter
+- add views to improve preformance db actions
 - add verbose mode to let script run in service mode

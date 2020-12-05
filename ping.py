@@ -9,7 +9,7 @@ from tableHandling import checkTable
 from tableHandling import createHostTable
 from tableHandling import createProtocolTable
 from tableHandling import retHosts
-from pingHandler import startPing
+from pingHandler import handlePing
 import time
 from threading import Thread
 from showStatus import showHostList
@@ -30,14 +30,15 @@ enterNewHost(hostTable)
 
 # fetch hosts
 hostList = retHosts(hostTable)
-# start ping function in thread
-pingThread = Thread(target = startPing(hostList, pingProtocolTable), args = (10, ))
-pingThread.start()
-pingThread.join()
+# execute ping for available hosts
+for entry in hostList:
+    handle = handlePing(pingProtocolTable, entry[0])
+
+#pingThread.join()
 while True:
     # get host list
     hostList = retHosts(hostTable)
      # show results
     showHostList(hostTable, pingProtocolTable, hostList)
-    time.sleep(1)
+    time.sleep(2)
         
