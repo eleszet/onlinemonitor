@@ -1,6 +1,12 @@
 from tableHandling import addProtocol
 import subprocess, platform
+from threading import Thread
 
+def startPing(hostList, pingProtocolTable):
+    for entry in hostList:
+        pingThread = Thread(target = handlePing.execPing(pingProtocolTable, entry[0]), args = (10, ))
+        pingThread.start()
+        pingThread.join()
 class handlePing(object):
     def __init__(self): 
         self.name = name
