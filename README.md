@@ -6,4 +6,4 @@ my first
 - git
 
 onlinemonitor for saved hosts
-not tested under linux yet
+not tested on linux yet
