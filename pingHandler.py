@@ -14,8 +14,9 @@ class handlePing(object):
         ping_str = "-n 1" if  platform.system().lower()=="windows" else "-c 1"
         args = "ping " + " " + ping_str + " " + hostName
         #extractPingResult = subprocess.call(args, shell=need_sh)
-        msTime = extractPingResult(str(subprocess.check_output(args)))
-        addProtocol(protocolTable, hostName, int(msTime[0]))
+        #msTime, issue 
+        result = extractPingResult(str(subprocess.check_output(args)))
+        addProtocol(protocolTable, hostName, int(result[0]), str(result[1]))
         return 
     
 # internal functions
@@ -31,4 +32,8 @@ def extractPingResult(cmdReturn):
             testVar = entry
             numOut = re.findall("\d+", testVar)
             break
-    return numOut
+    if numOut ==0:
+        issue="1"
+    else:
+        issue="0"
+    return numOut, issue

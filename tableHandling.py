@@ -36,7 +36,7 @@ def createHostTable(table):
 def createProtocolTable(table):
     conSet = openConnection()
     # create table for protocol entries
-    postgreSQL_Query = "create table " + table + " (protocolID SERIAL primary key, hostName VARCHAR (50), protocol integer, date_added timestamp default NULL)"
+    postgreSQL_Query = "create table " + table + " (protocolID SERIAL primary key, hostName VARCHAR (50), reaction integer, issue varchar(1), date_added timestamp default NULL)"
     conSet[0].execute(postgreSQL_Query, (table,))
     conSet[1].commit()
     closeConnection(conSet)
@@ -68,12 +68,12 @@ def addHost(table, hostName):
     closeConnection(conSet)
     return
 
-def addProtocol(table, hostName, protocolLog):
+def addProtocol(table, hostName, issue, protocolLog):
     conSet = openConnection()
     # create table for protocol entries
-    postgreSQL_Query = "insert into " + table + " (hostName, protocol, date_added) values(%s, %s, %s)"
+    postgreSQL_Query = "insert into " + table + " (hostName, reaction, issue, date_added) values(%s, %s, %s, %s)"
     try:
-        conSet[0].execute(postgreSQL_Query, (hostName,protocolLog, datetime.datetime.now(),))
+        conSet[0].execute(postgreSQL_Query, (hostName,protocolLog,issue, datetime.datetime.now(),))
         conSet[1].commit()
     except:
         print("Error while saving")
