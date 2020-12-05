@@ -11,6 +11,9 @@ from tableHandling import createProtocolTable
 from tableHandling import openConnection
 from tableHandling import addHost
 from tableHandling import retHosts
+from pingHandler import handlePing
+import time
+from threading import Thread
 
 # table names
 hostTable = "hostnames"
@@ -23,12 +26,18 @@ if(not checkTable(pingProtocolTable)):
     createProtocolTable(pingProtocolTable)
 
 # check for new hostname and insert
-print("Enter new hostnames to store")
-hostName = input("Hostname or IP: ") 
-if hostName>"":
-    addHost(hostTable, hostName)
+# print("Enter new hostnames to store")
+# hostName = input("Hostname or IP: ") 
+# if hostName>"":
+#     addHost(hostTable, hostName)
 
 # list of hosts
-hostList = retHosts(hostTable)
-for entry in hostList:
-    print(entry)
+while True:
+    hostList = retHosts(hostTable)
+    for entry in hostList:
+        pingThread = Thread(target = handlePing.execPing(pingProtocolTable, entry[0]), args = (10, ))
+        pingThread.start()
+        pingThread.join()
+        #os.spawnlp(handlePing.execPing(pingProtocolTable, entry[0]))
+    time.sleep(1)
+        

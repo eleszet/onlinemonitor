@@ -1,4 +1,5 @@
 import psycopg2
+import datetime
 
 # class to check if a table is existing
 def checkTable(table):
@@ -35,7 +36,7 @@ def createHostTable(table):
 def createProtocolTable(table):
     conSet = openConnection()
     # create table for protocol entries
-    postgreSQL_Query = "create table " + table + " (protocolID SERIAL primary key, hostName VARCHAR (50), protocol VARCHAR (500))"
+    postgreSQL_Query = "create table " + table + " (protocolID SERIAL primary key, hostName VARCHAR (50), protocol integer, date_added timestamp default NULL)"
     conSet[0].execute(postgreSQL_Query, (table,))
     conSet[1].commit()
     closeConnection(conSet)
@@ -61,6 +62,18 @@ def addHost(table, hostName):
     postgreSQL_Query = "insert into " + table + " (hostName) values(%s)"
     try:
         conSet[0].execute(postgreSQL_Query, (hostName,))
+        conSet[1].commit()
+    except:
+        print("Error while saving")
+    closeConnection(conSet)
+    return
+
+def addProtocol(table, hostName, protocolLog):
+    conSet = openConnection()
+    # create table for protocol entries
+    postgreSQL_Query = "insert into " + table + " (hostName, protocol, date_added) values(%s, %s, %s)"
+    try:
+        conSet[0].execute(postgreSQL_Query, (hostName,protocolLog, datetime.datetime.now(),))
         conSet[1].commit()
     except:
         print("Error while saving")
