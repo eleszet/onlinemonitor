@@ -1,9 +1,10 @@
 # onlinemonitor - ptactive some python
 
-my first 
-- oop/python project 
+my first project with
+- oop/python 
 - postgres docker https://hub.docker.com/_/postgres
 -- start postgres with this command: docker run -p 5432:5432 --name myP -e POSTGRES_PASSWORD=postgres -d postgres
+- postgres access via psycopg2 https://pypi.org/project/psycopg2/ (pip install psycopg2)
 - git
 - runs with https://pypi.org/project/psycopg2/ (pip install psycopg2)
 
