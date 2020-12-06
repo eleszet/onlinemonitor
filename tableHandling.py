@@ -5,19 +5,15 @@ import datetime
 def checkTable(table):
     # 0=cursor, 1=connection
     conSet = openConnection()
-
     # select target table and check if it's available or not
     postgreSQL_Query = "SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name = %s)"
     conSet[0].execute(postgreSQL_Query, (table,))
-
     # read return value
     lines = conSet[0].fetchall()
     for row in lines:
         rVal = (row[0])
-
     # close connection
     closeConnection(conSet)
-
     # return value
     if(str(rVal).upper()=="FALSE") :
         return False
@@ -125,7 +121,6 @@ def countTotalForAll10(table):
     closeConnection(conSet)
     return lines
 
-# from time for the evaluation of the average ms
 def getFromTime():
     timeDifferenceMinutes = 15
     return datetime.datetime.now() - datetime.timedelta(minutes=timeDifferenceMinutes)

@@ -10,7 +10,7 @@ class handlePing(object):
         self.args = args
         self.protocolTable = args[0]
         self.hostName = args[1]
-        self.interval = 0.5
+        self.interval = 1
         thread = threading.Thread(target=self.execPing, args=())
         #thread.daemon = True  # Daemonize thread
         thread.start()        # Start the execution

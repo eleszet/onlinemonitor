@@ -11,6 +11,7 @@ my first project with
 feature
 - add hosts to a table
 - run ping in threads and see avg ms of the last x minutes (including missed pings)
+
 note
 - not tested on linux yet
 
@@ -18,3 +19,5 @@ todo
 - add config file instead of hardcoded connection parameter
 - add views to improve preformance db actions
 - add verbose mode to let script run in service mode
+- redesign consule output: only perform 1 select for all hosts to get results instead 1 select per host
+- optimize console output
