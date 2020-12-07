@@ -20,4 +20,4 @@ todo
 - add views to improve preformance db actions
 - add verbose mode to let script run in service mode
 - redesign consule output: only perform 1 select for all hosts to get results instead 1 select per host
-- optimize console output
+-- change single select to grouped select
