@@ -1,5 +1,6 @@
 from tableHandling import addProtocol
-import subprocess, platform
+import subprocess
+import platform
 from threading import Thread
 import threading
 import time
