@@ -27,7 +27,6 @@ def createHostTable(table):
     conSet[0].execute(postgreSQL_Query, (table,))
     conSet[1].commit()
     closeConnection(conSet)
-    return
 
 def createProtocolTable(table):
     conSet = openConnection()
@@ -36,7 +35,6 @@ def createProtocolTable(table):
     conSet[0].execute(postgreSQL_Query, (table,))
     conSet[1].commit()
     closeConnection(conSet)
-    return
 
 def openConnection():
     connection = psycopg2.connect(
@@ -62,8 +60,7 @@ def addHost(table, hostName):
     except:
         print("Error while saving")
     closeConnection(conSet)
-    return
-
+    
 def addProtocol(table, hostName, ms, issue):
     conSet = openConnection()
     # create table for protocol entries
@@ -74,7 +71,6 @@ def addProtocol(table, hostName, ms, issue):
     except:
         print("Error while saving")
     closeConnection(conSet)
-    return
 
 def retHosts(table):
     conSet = openConnection()
