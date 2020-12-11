@@ -1,5 +1,6 @@
 import os
-import subprocess, platform
+import subprocess
+import platform
 from tableHandling import addHost 
 from tableHandling import countTotalForHost10 
 from tableHandling import countTotalForAll10
