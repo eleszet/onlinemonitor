@@ -1,8 +1,10 @@
+#-----------------------------------------------------------------------------
 # practicing some pythong 
 # - using different files / functions
 # - using local postgres DB wit hsome create/select/delete statements
 # - show & maintain a host table
 # - execute several ping commands parallel and store the result in a table
+#-----------------------------------------------------------------------------
 
 #import table functions
 from tableHandling import checkTable
