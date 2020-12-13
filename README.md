@@ -1,4 +1,4 @@
-# onlinemonitor - ptactive some python
+# onlinemonitor - practice some python
 
 my first project with
 - oop/python 
