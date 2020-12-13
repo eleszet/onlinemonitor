@@ -25,7 +25,7 @@ class handlePing(object):
         args = "ping " + " " + ping_str + " " + self.hostName
         #extractPingResult = subprocess.call(args, shell=need_sh)
         #msTime, issue 
-        test = extractPingResult(str(subprocess.check_output(args)))
+        #test = extractPingResult(str(subprocess.check_output(args)))
         while True:
             try:
                 result = extractPingResult(str(subprocess.check_output(args)))
