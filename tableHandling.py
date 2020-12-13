@@ -31,7 +31,7 @@ def createHostTable(table):
 def createProtocolTable(table):
     conSet = openConnection()
     # create table for protocol entries
-    postgreSQL_Query = "create table " + table + " (protocolID SERIAL primary key, hostName VARCHAR (50), reaction integer, issue varchar(1), date_added timestamp default NULL)"
+    postgreSQL_Query = "create table " + table + " (protocolID SERIAL primary key, hostName VARCHAR (50), reaction decimal(10,2), issue varchar(1), date_added timestamp default NULL)"
     conSet[0].execute(postgreSQL_Query, (table,))
     conSet[1].commit()
     closeConnection(conSet)

@@ -19,7 +19,7 @@ from showStatus import enterNewHost
 
 # table names
 hostTable = "hostnames"
-pingProtocolTable = "pingprotocol"
+pingProtocolTable = "protocol"
 
 # check & create tables
 if(not checkTable(hostTable)):
