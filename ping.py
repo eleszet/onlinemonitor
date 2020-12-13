@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------
-# practicing some pythong 
+# practicing some pythong
 # - using different files / functions
 # - using local postgres DB wit hsome create/select/delete statements
 # - show & maintain a host table
@@ -43,4 +43,4 @@ while True:
      # show results
     showHostList(hostTable, pingProtocolTable, hostList)
     time.sleep(60)
-        
+

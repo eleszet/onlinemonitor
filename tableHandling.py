@@ -17,6 +17,8 @@ def checkTable(table):
     # return value
     if(str(rVal).upper()=="FALSE") :
         return False  
+    else:
+        return True
 
 def createHostTable(table):
     conSet = openConnection()
