@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------
-# practicing some pythong
+# practicing some python
 # - using different files / functions
 # - using local postgres DB wit hsome create/select/delete statements
 # - show & maintain a host table
