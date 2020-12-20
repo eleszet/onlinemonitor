@@ -90,42 +90,6 @@ def retAll10(table):
     closeConnection(conSet)
     return lines
 
-def retHostInfo10(table, hostName):
-    conSet = openConnection()
-    # create table for protocol entries
-    postgreSQL_Query = "select hostName, avg(reaction) from " + table + " org where hostname = %s and date_added > %s group by hostname"
-    conSet[0].execute(postgreSQL_Query, (hostName,getFromTime(),))
-    lines = conSet[0].fetchall()
-    closeConnection(conSet)
-    return lines
-    
-def countTotalForHost10(table, hostName):
-    conSet = openConnection()
-    # create table for protocol entries
-    postgreSQL_Query = "select count(*) from " + table + " org where hostname = %s and date_added > %s"
-    conSet[0].execute(postgreSQL_Query, (hostName,getFromTime(),))
-    lines = conSet[0].fetchall()
-    closeConnection(conSet)
-    return lines
-
-def countIssueHost10(table, hostName, failSucess):
-    conSet = openConnection()
-    # create table for protocol entries
-    postgreSQL_Query = "select count(*) from " + table + " org where hostname = %s and date_added > %s and issue=%s"
-    conSet[0].execute(postgreSQL_Query, (hostName,getFromTime(), failSucess,))
-    lines = conSet[0].fetchall()
-    closeConnection(conSet)
-    return lines
-
-def countTotalForAll10(table):
-    conSet = openConnection()
-    # create table for protocol entries
-    postgreSQL_Query = "select count(*) from " + table + " org where date_added > %s"
-    conSet[0].execute(postgreSQL_Query, (getFromTime(),))
-    lines = conSet[0].fetchall()
-    closeConnection(conSet)
-    return lines
-
 def getFromTime():
     timeDifferenceMinutes = 15
     return datetime.datetime.now() - datetime.timedelta(minutes=timeDifferenceMinutes)
