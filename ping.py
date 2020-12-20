@@ -42,5 +42,5 @@ while True:
     hostList = retHosts(hostTable)
      # show results
     showHostList(hostTable, pingProtocolTable, hostList)
-    time.sleep(60)
+    time.sleep(1)
 
