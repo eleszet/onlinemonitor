@@ -8,6 +8,7 @@ from tableHandling import retHosts
 from tableHandling import retHostInfo10
 from tableHandling import addProtocol
 from tableHandling import countIssueHost10
+from tableHandling import retAll10
 
 def enterNewHost(hostTable):
     newHost=""
@@ -24,16 +25,13 @@ def showHostList(hostTable, pingProtocolTable, hostList):
     print(f"Results of the last pings (15 minutes past - total pings {sumTotalPings})")
     print("Host \t\t| total Pings \t\t\t| average reaction time")
     print("------------------------------------------------------------------------")
-    for entry in hostList:
-        hostInfoList = hostInfo(pingProtocolTable, entry[0])
-        # sum of pings for host
-        sumPing = retNumVal(countTotalForHost10(pingProtocolTable, entry[0]))
-        # sum of fails for host
-        sumFail = retNumVal(countIssueHost10(pingProtocolTable, entry[0], "1"))
-        # sum of succesful pings for host
-        sumSuccess = retNumVal(countIssueHost10(pingProtocolTable, entry[0], "0"))
-        for sub in hostInfoList:
-            print(sub[0] + " \t| " + str(sumPing) + " - " + str(sumSuccess)+  "/" + str(sumFail) + " \t\t\t| " + str(sub[1]))
+    # get results from protocol table for all hosts
+    for entry in retAll10(pingProtocolTable):
+        # calculate pings (no need to perform a sum in the SQL then)
+        issues = entry[3]
+        success = entry[2] - issues
+              #hostname            sum pings               success               fails                         average ms
+        print(entry[0] + " \t| " + str(entry[2]) + " - " + str(success) +  "/" + str(entry[3]) + " \t\t\t| " + str(entry[1]))
 
 def clear():
     print("\033[H\033[J")
