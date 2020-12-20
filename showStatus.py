@@ -27,11 +27,8 @@ def showHostList(hostTable, pingProtocolTable, hostList):
     print("------------------------------------------------------------------------")
     # get results from protocol table for all hosts
     for entry in retAll10(pingProtocolTable):
-        # calculate pings (no need to perform a sum in the SQL then)
-        issues = entry[3]
-        success = entry[2] - issues
               #hostname            sum pings               success               fails                         average ms
-        print(entry[0] + " \t| " + str(entry[2]) + " - " + str(success) +  "/" + str(entry[3]) + " \t\t\t| " + str(entry[1]))
+        print(entry[0] + " \t| " + str(entry[2]) + " - " + str(entry[4]) +  "/" + str(entry[3]) + " \t\t\t| " + str(entry[1]))
 
 def clear():
     print("\033[H\033[J")

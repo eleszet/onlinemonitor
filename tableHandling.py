@@ -84,7 +84,7 @@ def retHosts(table):
 def retAll10(table):
     conSet = openConnection()
     # create table for protocol entries
-    postgreSQL_Query = "select hostname, avg(reaction), count(*), count(issue) filter (where issue ='1') from " + table + " org where date_added > %s group by hostname "
+    postgreSQL_Query = "select hostname, avg(reaction), count(*), count(issue) filter (where issue ='1'), count(issue) filter (where issue ='0') from " + table + " org where date_added > %s group by hostname "
     conSet[0].execute(postgreSQL_Query, (getFromTime(),))
     lines = conSet[0].fetchall()
     closeConnection(conSet)
