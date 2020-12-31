@@ -1,4 +1,4 @@
-from tableHandling import addProtocol
+import tableHandling
 import subprocess
 import platform
 from threading import Thread
@@ -9,8 +9,7 @@ class handlePing(object):
     # constructor of the ping handle
     def __init__(self, *args):
         self.args = args
-        self.protocolTable = args[0]
-        self.hostName = args[1]
+        self.hostName = args[0]
         self.interval = 1
         thread = threading.Thread(target=self.execPing, args=())
         #thread.daemon = True  # Daemonize thread
@@ -29,7 +28,7 @@ class handlePing(object):
                 result = extractPingResult(str(subprocess.check_output(args, shell=True)))
             except:
                 result = 0,1        
-            addProtocol(self.protocolTable, self.hostName, float(result[0]), str(result[1]))
+            tableHandling.addProtocol(tableHandling.protocolTable, self.hostName, float(result[0]), str(result[1]))
             time.sleep(self.interval)
         return 
     
@@ -61,3 +60,10 @@ def extractPingResult(cmdReturn):
     else:
         issue="0"
     return numOut, issue
+
+# Start ping handles
+def startPingHandle():
+    myHost = tableHandling.retHosts(tableHandling.hostTable)
+    # execute ping for available hosts
+    for entry in myHost:
+        handle = handlePing(entry[0])

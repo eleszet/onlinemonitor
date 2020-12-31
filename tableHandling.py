@@ -1,6 +1,16 @@
 import psycopg2
 import datetime
 
+hostTable = "hostnames"
+protocolTable = "protocol"
+
+# check if tables exist, if not create
+def checkExists():
+    if(not checkTable(hostTable)):
+        createHostTable(hostTable)
+    if(not checkTable(protocolTable)):
+        createProtocolTable(protocolTable)
+
 # class to check if a table is existing
 def checkTable(table):
     # 0=cursor, 1=connection
