@@ -1,6 +1,9 @@
 import tableHandling
 import time
-
+import rich
+from rich import print
+from rich.console import Console
+from rich.table import Table
 
 def enterNewHost():
     # enter new host
@@ -36,26 +39,36 @@ def showPingsLoop():
 
 
 def showPings():
-    clear()
-    # read pings of the last 10 minutes
+    # create objects for console and table
+    console = Console()
+    table = Table(show_header=True, header_style="bold magenta")
+    table.add_column("Host")
+    table.add_column("Total Pings")
+    table.add_column("Average MS")
+    table.add_column("Success", style="green")
+    table.add_column("Fails", style="red")
+    # fetch results of the pings and write into table
     pingResult = tableHandling.retAll10()
-    sumPings = 0
-    for entry in pingResult:
-        sumPings = sumPings + entry[2]
-    print(
-        f"Results of the last pings (15 minutes past - total pings {sumPings})")
-    print("Host \t\t| total Pings \t\t\t| average reaction time")
-    print("------------------------------------------------------------------------")
-    # get results from protocol table for all hosts
-    for entry in pingResult:
-        # hostname            sum pings               success               fails                         average ms
-        print(entry[0] + " \t| " + str(entry[2]).zfill(3) + " - " + str(entry[4]).zfill(3) +
-              "/" + str(entry[3]).zfill(3) + " \t\t\t| " + "{:.2f}".format(entry[1]).zfill(5) + " ms")
-    time.sleep(1)
+    sumPings=0
+    for result in pingResult:
+        avgFormat = "{:.2f}".format(result[1]).zfill(5)
+        table.add_row(
+            str(result[0]), # hostname
+            str(result[2]), # sum of pings sent to this host in last x minutes
+            str(avgFormat), # formatted avg reaction time
+            str(result[4]), # failed pings
+            str(result[3])  # successed pings
 
+        )
+        sumPings+=result[2]
+    # print table in console
+    console.clear()
+    console.print(table)
+    # 5sec delay
+    time.sleep(5)
 
 def showCurrentActiveHosts():
-    # show list of currentactive hosts
+    # show list of currentactive hosts  
     clear()
     hostList = tableHandling.retHosts()
     print("Current Hostnames: ")
