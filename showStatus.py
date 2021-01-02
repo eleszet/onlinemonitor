@@ -38,7 +38,7 @@ def showPingsLoop():
 def showPings():
     clear()
     # read pings of the last 10 minutes
-    pingResult = retAll10()
+    pingResult = tableHandling.retAll10()
     sumPings = 0
     for entry in pingResult:
         sumPings = sumPings + entry[2]
