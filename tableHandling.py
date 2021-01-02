@@ -126,6 +126,16 @@ def retAll10():
     return lines
 
 
+def countAllProtocol():
+    conSet = openConnection()
+    # create table for protocol entries
+    postgreSQL_Query = "select count (*) from " + protocolTable
+    conSet[0].execute(postgreSQL_Query, (getFromTime(),))
+    lines = conSet[0].fetchall()
+    closeConnection(conSet)
+    return lines
+
+
 def getFromTime():
     timeDifferenceMinutes = 15
     return datetime.datetime.now() - datetime.timedelta(minutes=timeDifferenceMinutes)
