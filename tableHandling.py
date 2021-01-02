@@ -1,5 +1,6 @@
 import psycopg2
 import datetime
+import json
 
 hostTable = "hostnames"
 protocolTable = "protocol"
@@ -52,12 +53,14 @@ def createProtocolTable():
 
 
 def openConnection():
+    with open('db_cfg.json') as f:
+        cfg = json.load(f)
     connection = psycopg2.connect(
-        host="localhost",
-        port="5432",
-        database="",
-        user="postgres",
-        password="postgres")
+        host=cfg["host"],
+        port=cfg["port"],
+        database=cfg["database"],
+        user=cfg["user"],
+        password=cfg["password"])
     cursor = connection.cursor()
     return [cursor, connection]
 
