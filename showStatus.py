@@ -58,7 +58,6 @@ def showPings():
             str(avgFormat), # formatted avg reaction time
             str(result[4]), # failed pings
             str(result[3])  # successed pings
-
         )
         sumPings+=result[2]
     # print table in console
