@@ -139,6 +139,17 @@ def countAllProtocol():
     return lines
 
 
+def getTimeoutsIntervall():  # show all timeouts in the last interval
+    conSet = openConnection()
+    # create table for protocol entries
+    postgreSQL_Query = "select hostname, date_added from " + \
+        protocolTable + " where date_added > %s and issue='1'"
+    conSet[0].execute(postgreSQL_Query, (getFromTime(),))
+    lines = conSet[0].fetchall()
+    closeConnection(conSet)
+    return lines
+
+
 def getFromTime():
     timeDifferenceMinutes = 15
     return datetime.datetime.now() - datetime.timedelta(minutes=timeDifferenceMinutes)

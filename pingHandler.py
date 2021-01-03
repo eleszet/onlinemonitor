@@ -7,8 +7,7 @@ import time
 
 
 class handlePing(object):
-    # constructor of the ping handle
-    def __init__(self, *args):
+    def __init__(self, *args): # constructor of the ping handle
         self.args = args
         self.hostName = args[0]
         self.interval = 1
@@ -16,8 +15,7 @@ class handlePing(object):
         # thread.daemon = True  # Daemonize thread
         thread.start()        # Start the execution
 
-    # class for the ping
-    def execPing(self):
+    def execPing(self): # execute the ping and save the result
         # Returns True if host responds to a ping request
         ping_str = "-n 1" if platform.system().lower() == "windows" else "-c 1"
         args = "ping" + " " + ping_str + " " + self.hostName
@@ -33,10 +31,8 @@ class handlePing(object):
             time.sleep(self.interval)
         return
 
-# internal functions
 
-
-def extractPingResult(cmdReturn):
+def extractPingResult(cmdReturn):  # extract ms from result
     import re
     # read CMD output
     # split string separated by "ms"
@@ -65,10 +61,8 @@ def extractPingResult(cmdReturn):
         issue = "0"
     return numOut, issue
 
-# Start ping handles
 
-
-def startPingHandle():
+def startPingHandle():  # Start ping handles
     myHost = tableHandling.retHosts()
     # execute ping for available hosts
     for entry in myHost:
