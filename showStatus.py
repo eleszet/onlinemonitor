@@ -116,4 +116,3 @@ def showTimeoutsInterval():
             str(result[1]),
         )
     console.print(table)
-    input()
